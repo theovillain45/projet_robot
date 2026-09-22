@@ -1,16 +1,23 @@
 #include <msp430.h>
+#include "Afficheur.h"
  
-int compt_timer=0;
+volatile int compt_front=0;
  
-#pragma vector = TIMER0_A1_VECTOR
-__interrupt void TIMER0_ISR(void) {
-
-  
-  if ((TA1CTL & TAIFG) == TAIFG) {
-    compt_timer++;
-    TA1CTL &= ~(TAIFG);
-  }
+void config_octo()
+{
+    P2SEL &= ~ BIT0;
+    P2SEL2 &= ~ BIT0;
+    P2DIR &= ~ BIT0;
+    P2IE |= BIT0;
+    P2IES |= BIT0;
+ 
+    P2SEL &= ~ BIT3;
+    P2SEL2 &= ~ BIT3;
+    P2DIR &= ~ BIT3;
+    P2IE |= BIT3;
+    P2IES |= BIT3;
 }
+ 
  
 void sens_moteur_A(int sens)
 {
@@ -51,9 +58,30 @@ void pwm_moteur_B(int n)
    
  }
  
+ #pragma vector=PORT2_VECTOR
+ __interrupt void compt_front(void)
+{
+   if((P2IFG| BIT0)==BIT0)
+   {
+     compt_front++;
+     P2IES &= ~BIT0;
+     if(compt_front==48) P2IES &= ~BIT0;
+     P2IFG &= ~BIT0;
+   }
+ 
+   if((P2IFG| BIT3)==BIT3)
+   {
+     compt_front++;
+     P2IES &= ~BIT3;
+     if(compt_front==48) P2IES &= ~BIT3;
+     P2IFG &= ~BIT3;
+   }
+}
+ 
+ 
 int main(void)
 {
-  int pwm_grad=1000;
+  int pwm_grad=2000;
  
   WDTCTL = WDTPW + WDTHOLD;
  
@@ -77,16 +105,18 @@ int main(void)
  
   // activation mode de sortie n°7
   TA1CCR0 = 5000;  
+  config_octo();
+ 
   __enable_interrupt();
-    pwm_moteur_A(pwm_grad);
+  pwm_moteur_A(pwm_grad);
  
-    pwm_moteur_B(pwm_grad);
+  pwm_moteur_B(pwm_grad);
  
-    sens_moteur_A(1);
+  sens_moteur_A(1);
  
-    sens_moteur_B(1);
+  sens_moteur_B(1);
  
-  //robot_arret(10);
+  robot_arret(10);
   while(1);
  
 }
