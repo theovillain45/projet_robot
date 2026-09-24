@@ -1,0 +1,8 @@
+"./ADC.obj"
+"./Afficheur.obj"
+"./config.obj"
+"./machine_etat.obj"
+"./main.obj"
+"./mouv_function.obj"
+"../lnk_msp430g2553.cmd"
+-llibc.a
