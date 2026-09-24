@@ -86,23 +86,19 @@ int main(void)
   Transition trs;
   Transition table_transition[NB_ETATS][NB_EVENTS] = {
     [MARCHE] = {
-      [OBSTACLE] = {ARRET, action_pivoter},
+      [OBSTACLE] = {ARRET, action_arret},
       [PAS_OBSTACLE] = {MARCHE, action_avancer}
       },
     [ARRET] = {
-      [OBSTACLE] = { ARRET, action_pivoter},
+      [OBSTACLE] = { ARRET, action_arret},
       [PAS_OBSTACLE] = {MARCHE, action_avancer}
     }
-    // [PIVOTER] = {
-    //   [OBSTACLE] = {PIVOTER, action_pivoter},
-    //   [PAS_OBSTACLE] = { MARCHE, action_avancer}
-    // }
     };
  
   //avancer();
  
   __enable_interrupt();
-  while(1){
+  while(stop_1_30_m()){
     event = get_event();
     trs = table_transition[etat][event];
     trs.action();

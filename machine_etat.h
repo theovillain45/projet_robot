@@ -1,6 +1,6 @@
 typedef void (*Action)(void);
  
-typedef enum { MARCHE, ARRET , PIVOTER, NB_ETATS } Etat;
+typedef enum { MARCHE, ARRET , NB_ETATS } Etat;
  
 typedef enum {
   OBSTACLE,
@@ -17,7 +17,5 @@ Action action;
 void action_avancer();
  
 void action_arret();
-
-void action_pivoter();
  
 Event get_event();

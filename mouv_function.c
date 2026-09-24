@@ -9,8 +9,8 @@ int permille_control(int percent)
 
 void avancer()
 {
-    TA1CCR1= permille_control(400);
-    TA1CCR2= permille_control(450);
+    TA1CCR1= permille_control(200);
+    TA1CCR2= permille_control(230);
     P2OUT &= ~BIT1;
     P2OUT |= BIT5;
 }
@@ -36,14 +36,6 @@ void pivoter_gauche()
     P2OUT |= BIT1;
     P2OUT |= BIT5;
     __delay_cycles(500000);
-    robot_arret();
-}
-
-void pivoter_gauche_5fois()
-{
-    P2OUT |= BIT1;
-    P2OUT |= BIT5;
-    __delay_cycles(2000000);
     robot_arret();
 }
 
