@@ -5,9 +5,9 @@ L'objectif de ce projet est de passer l'étape de l'homologation ainsi que de d�
 
 Le robot qui a été choisi est le robot "fast".
 
-Le code de l'homologation est disponible sur la branche "robot_fast_homolog"
-Le code de la dance est disponible dans la branche "robot_dance_ameliore"
-De plus, Nous avions également prévu une dance de robot moins développé, en cas de secours, dans la branche "robot_dance"
+### Le code de l'homologation est disponible sur la branche "robot_fast_homolog"
+### Le code de la dance est disponible dans la branche "robot_dance_ameliore"
+### De plus, Nous avions également prévu une dance de robot moins développé, en cas de secours, dans la branche "robot_dance"
 
 ## 1 - Programme pour être homologué
 Voici les conditions d'homologation d'un robot pour l'évaluation finale :
